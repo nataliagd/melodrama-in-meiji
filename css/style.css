@@ -1,0 +1,26 @@
+.loading {
+  text-align: center;
+  vertical-align: bottom;
+  height: 300px;
+  padding-top: 50px;
+}
+
+.loading.ng-enter {
+  -webkit-animation: 0.5s fade-in;
+  -moz-animation: 0.5s fade-in;
+  -o-animation: 0.5s fade-in;
+  animation: 0.5s fade-in;
+  z-index: 100;
+}
+
+.loading.ng-leave {
+  -webkit-animation: 0.5s fade-out;
+  -moz-animation: 0.5s fade-out;
+  -o-animation: 0.5s fade-out;
+  animation: 0.5s fade-out;
+  z-index:99;
+}
+
+.text-muted {
+  color: #98978b;
+}
