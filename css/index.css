@@ -46,10 +46,10 @@ main {
 
 /* Slideshow container */
 .slideshow-container {
-    height: 90%;
-    width: 90%;
+    height: 520px;
+    width: 75%;
     margin-left: 5%;
-	margin-top: 60px !important;
+	margin-top: 20px !important;
     margin-bottom: 40px !important;
     position: relative;
     margin: auto;
@@ -66,7 +66,6 @@ main {
     background-color: #717171;
     }
 
- /* Fading animation */
 
 #header {
     height: 100px;
@@ -335,14 +334,13 @@ main {
 .itemSlides
 {display:none}
 
-.highSlides img, .itemSlides img
- {
+.highSlides img, .itemSlides img {
     height: 380px;
     width: 65%;
     margin-left: 17.5%;
-    margin-top: 12% !important;
+    margin-top: 9% !important;
     object-fit:cover;
-     object-position: center;
+    object-position: center;
 }
 
 /* Next & previous buttons */
@@ -368,7 +366,7 @@ main {
 
 /* Position the "next button" to the right */
 .next {
-    right: 10px;
+    right: 40px;
 }
 
 /* Caption text */
