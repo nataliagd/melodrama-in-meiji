@@ -1,4 +1,4 @@
-@media screen and (min-width: 1025px) {
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px)  {
     @font-face {
 	font-family: 'Gilroy';
 	src: url('../fonts/gilroy-extrabold.otf');
@@ -51,7 +51,7 @@ main {
     width: 75%;
     margin-left: 12.5%;
     margin-top: 20px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 20px !important;
     position: relative;
     margin: auto;
     object-fit:cover;
@@ -185,9 +185,9 @@ main {
     line-height: 25px;
     font-family: Gilroy !important;
     font-weight: 300;
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
 
 }
 
@@ -343,7 +343,7 @@ main {
     height: 380px;
     width: 65%;
     margin-left: 17.5%;
-    margin-top: 12% !important;
+    margin-top: 9% !important;
     object-fit:cover;
      object-position: center;
 }
@@ -514,7 +514,7 @@ main {
 
 .featured, .resources  {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #ffffff;
     margin:88px 0 0 0px;
     float: left;
@@ -536,13 +536,13 @@ main {
     margin-top: 12px;
     margin-left: 0px;
     float: left;
-    position: relative;
+    position: fixed;
     z-index: 9;
 }
 
 
 #featured-header h1, #resources-header h1 {
-    margin: 20px 0  0 50px;
+    margin: 27px 0  0 50px;
     width: 30%;
     float: left;
     font-size: 35pt;
@@ -555,7 +555,7 @@ main {
     float: right;
     width: 30%;
     list-style-type: none;
-    margin: 30px 0px 0 0px;
+    margin: 30px -10% 0 0px;
     padding: 0;
     overflow: hidden;
     height: 100%;
@@ -568,7 +568,7 @@ button {
 
 #featured-header li, #resources-header li {
     display: inline-block;
-    margin: 0 0px 0 0px;
+    margin: 0 15px 0 0px;
     height: 65px;
     width: 65px;
 }
@@ -584,13 +584,12 @@ button {
 }
 
 #resources-secondary {
-    position: relative;
-    margin-top: 0px;
     width: 100%;
-    height: 50px;
+    height: 60px;
     background: #ffffff;
     margin: 95px 0 0 10px;
     float: left;
+    position: fixed;
     z-index: 9;
 
 }
@@ -650,7 +649,7 @@ button {
 #featured-list-container .featured-grid li, #resources-list-container .resources-grid li {
     width: 30%;
     margin: 1.5% 1.5% 1.5% 1.5% ;
-    height: 375px !important;
+    height: 330px;
     background-color: #dedede;
     display: inline-block;
 }
@@ -665,7 +664,7 @@ button {
 .featured-grid .featured-grid-title {
     position: absolute;
     height: 50px;
-    margin: -55px 0 0 0!important;
+    margin: -55px 0 0 0 !important;
     background-color: rgba(0,0,0,0.4);
     width: 30%;
     text-align: center;
@@ -677,20 +676,6 @@ button {
     z-index: 8;
 }
 
-.featured-grid .featured-grid-number {
-    position: absolute;
-    height: 50px;
-    margin:-50px 0 0 25!important;
-    width: 5%;
-    text-align: center;
-    color: #ffffff;
-    font-size: 12pt;
-    font-family: Gilroy;
-    font-weight: 300;
-    line-height: 50px;
-    z-index: 9;
-}
-
 .resources-grid .resources-grid-title, .resources-grid .resources-grid-type, .resources-grid .resources-grid-year {
     display: none;
 }
@@ -698,7 +683,7 @@ button {
 #featured-list-container .featured-list li, #resources-list-container .resources-list li {
     width: 30%;
     margin: 1.5% 0 0 0;
-    height: 450px;
+    height: 330px;
     background-color: #dedede;
 }
 
@@ -706,10 +691,10 @@ button {
 .featured-list .featured-grid-title, .resources-list .resources-grid-title {
     position: absolute;
     height: 40px;
-    margin: margin: -275px 0px 20px 32%;
+    margin: -335px 0px 20px 32%;
     background-color: transparent;
     color: #000000;
-    width: 90%;
+    width: 65%;
     font-size: 30pt;
     font-family: Gilroy;
     font-weight: 800;
@@ -721,7 +706,7 @@ button {
 .featured-list .featured-grid-item-numbers {
     position: absolute;
     height: 40px;
-    margin: -240px 0px 60px 32%;
+    margin: -300px 0px 60px 32%;
     background-color: transparent;
     color: #000000;
     /*width: 28.8%;*/
@@ -733,22 +718,20 @@ button {
 
 
 
-	body.safari .featured-list .featured-grid-item-numbers {
-
+body.safari .featured-list .featured-grid-item-numbers {
 	    margin: 40px 0px 60px 2% !important;
-
-
-
 }
+
 .featured-list  .featured-grid-description {
 	position: absolute;
 	height: 200px;
-	margin: -210px 0px 100px 32%;
+	margin: -270px 0px 100px 32%;
+    width: 65%;
 	color: #000000;
 	font-size: 14pt;
 	font-family: Gilroy;
 	font-weight: 100;
-	line-height: 20px;
+	line-height: 22px;
 }
 
 .featured-list .featured-grid-number, .resources-list .resources-grid-number {
@@ -763,7 +746,7 @@ button {
 
 .resources-list .resources-grid-type {
     position: absolute;
-    margin: -230px 0px 20px 32%;
+    margin: -70px 0px 20px 32%;
     background-color: transparent;
     color: #000000;
     font-size: 20pt;
@@ -774,7 +757,7 @@ button {
 }
 .resources-list .resources-grid-year {
     position: absolute;
-    margin:-200px 0px 20px 32%;
+    margin: -35px 0px 20px 32%;
     background-color: transparent;
     color: #000000;
     font-size: 20pt;
@@ -967,16 +950,16 @@ button {
 
 #item-header {
     height: 150px;
-    width: 70%;
+    width: 100%;
     margin-left: 2%;
     position: fixed;
 }
 
 #item-header h1 {
     font-family: Gilroy;
-    font-size: 30pt;
+    font-size: 25pt;
     font-weight: 800;
-    line-height: 50px;
+    line-height: 40px;
     margin-top: -10px !important;
     margin-left: 0px !important;
 }
@@ -1103,7 +1086,7 @@ button {
 
 /* FOOTER FOR BOTH FEATURED AND RESOURCES */
 #featured-footer, #resources-footer {
-    height: 240px;
+    height: 210px;
     width: 100%;
     border-top: 2px solid #dedede;
     background: #FFFFFF;
