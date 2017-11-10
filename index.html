@@ -1,141 +1,1169 @@
-<!doctype html>
-<html lang="en" ng-app="trovelistsApp" ng-controller="BaseCtrl">
-<head>
-  	<meta charset="utf-8">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-  	<title>{{ exhibition }}</title>
- 	 <meta name="description" content="Exhibition Application, powered by Trove">
-  	<meta name="author" content="Trove">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+@font-face {
+	font-family: 'Gilroy';
+	src: url('../fonts/gilroy-extrabold.otf');
+	font-weight: 800;
+	font-style: normal;
+}
 
-<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+@font-face {
+	font-family: 'Gilroy';
+	src: url('../fonts/gilroy-light.otf');
+	font-weight: 300;
+	font-style: normal;
+}
 
-    <link rel="stylesheet" href="css/index.css">
-<!--    <link rel="stylesheet" href="css/index_ipad.css">-->
-    <link rel="stylesheet" href="css/style.css">
-</head>
+/* --------------------------------
 
-<body id="body" >
+Primary style
 
-  <div class="container">
+-------------------------------- */
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    position: absolute;
+    z-index: 0;
+    /*overflow: hidden;*/
+	-webkit-overflow-scrolling: touch;
+}
 
-    <!-- EDIT THIS SECTION TO INCLUDE YOUR EXHIBITION DETAILS -->
-    <!-- Background Images -->
-    <div ng-hide="listHide" class="ng-hide" id="background-image1" class="page-header">img/HS_1.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="background-image2" class="page-header">img/HS_2.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="background-image3" class="page-header">img/HS_3.jpg</div>
+a {
+  text-decoration: none;
+}
 
-    <!-- Exhibition Highlights Images and Captions -->
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image1">img/high_1.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption1">Eisen Tomioka (1864-1905) A wife’s heart (Tsuma no kokoro) 1901, woodblock print, nla.obj-152406399</div>
+main {
+    background-color: #ffffff;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    z-index: 0;
+}
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image2">img/high_2.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption2"> Shoen Ikeda (1888-1917), The departing Spring (Yuku haru) 1913, woodblock print, nla.obj-152477362</div>
+/* Image Slider */
+.homeSlides {display:none}
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image3">img/high_3.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption3"> Keishu Takeuchi (1861-1942), Beauty under the moon (Gekka no bijin) 1896, woodblock print, nla.obj-152411793
-</div>
+/* Slideshow container */
+.slideshow-container {
+    height: 600px;
+    width: 75%;
+    margin-left: 12.5%;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    position: relative;
+    margin: auto;
+    object-fit:cover;
+    object-position: center;
+    }
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image4">img/high_4.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption4"> Koda Yamanaka (1869-1945), Firefly (Hotaru) 1913, woodblock print, nla.obj-152422444</div>
+/* The dots/bullets/indicators */
+.dot {
+    display:none;
+    }
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image5">img/high_5.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption5">Hanko Kajita (1870-1917), Plum (Ume) 1908, woodblock print, nla.ob-152422740</div>
+.active {
+    background-color: #717171;
+    }
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image6">img/high_6.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption6"> Keishu Takeuchi (1861-1942), Dawn (Akatsuki) 1912, woodblock print, nla.obj-152406698</div>
+ /* Fading animation */
 
-    <div ng-hide="listHide" class="ng-hide" id="highlights-image7">img/high_7.jpg</div>
-    <div ng-hide="listHide" class="ng-hide" id="highlights-caption7"> Kiyokata Kaburagi (1878-1972), Aloeswood (Kyara) 1908, woodblock print, nla.obj-152429941</div>
+#header {
+    height: 100px;
+    width: 100%;
+	background-color: transparent;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1 !important;
+}
+#header ul {
+	width: 100%;
+    font-family:Gilroy !important;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
 
-    <!-- Exhibition details -->
-    <h1 ng-hide="listHide" class="ng-hide" id="exhibition-name" class="page-header">Melodrama in Meiji</h1>
-    <h2 ng-hide="listHide" class="ng-hide" id="exhibition-tagline"></h2>
-    <div ng-hide="listHide" class="ng-hide" id="exhibition-description">
-        Step into the tumultuous world of Meiji Japan (1868–1912), through a selection of stunning Japanese woodblock illustrations. Used to illustrate Japanese novels, these beautiful images, known as kuchi-e (literally, ‘mouth/opening picture’), accompany stories filled with drama, tragedy and intrigue, reflecting the uncertainty of the times. Curated by Dr. Gary Hickey, the exhibition draws upon a substantial collection of kuchi-e amassed by University of NSW Emeritus Professor Richard Clough (1921-2014) and donated to the Library. This collection, along with other works acquired, forms one of the most significant collections of this genre in the world and the largest focused collection of Japanese art in Australia. The exhibition features over twenty artists and a range of subjects, illustrating a fascinating history of a genre profiled for the first time in a major exhibition.
-    </div>
-    <div ng-hide="listHide" class="ng-hide" id="exhibition-highlights">
-      EXHIBITION HIGHLIGHTS
-    </div>
-
-      <div ng-hide="listHide" class="ng-hide" id="exhibition-footer">
-      <h1>Visit the Exhibition</h1>
-      <h2><a href="https://www.nla.gov.au/meiji">Melodrama in Meiji Japan</a></h2>
-      <p>National Library Australia, Canberra</p>
-      <p>24th May to 27th August 2017</p>
-    </div>
-
-    <ul ng-hide="listHide" class="ng-hide" id="lists">
-
-      <!-- CHANGE THIS TO LIST THE TROVE LISTS THAT MAKE UP YOUR EXHIBITION -->
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102074">Historical Stories</a></li>
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102076">Contemporary Life</a></li>
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102083">Seasons & Festivals</a></li>
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102086">Beautiful Women</a></li>
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102089">Dramatic Stories</a></li>
-        <li><a class="list-link" href="http://trove.nla.gov.au/list?id=102090">Love & Romance</a></li>
-    </ul>
-    <script>
-      // ADD YOUR TROVE API KEY
-      var troveAPIKey = "cg6sn8lpjp7o8q19";
-      //var troveApiUrl="http://api.trove.nla.gov.au";
-      var troveApiUrl="https://trove-proxy.herokuapp.com/api";
-      var config = {};
-      config.listSnippet = 50;
-      config.directLinks = true;
-      config.showGrid = true;
-    </script>
-    <!-- END OF YOUR DETAILS -->
-<div class="loading text-muted" ng-hide="lists"><fa name="spinner" size="5" spin></fa><br>Loading resources&hellip;</div>
-    <div class="view-container" ng-show="lists">
-      <div ng-view="" class="view-frame"></div>
-      <div class="base-nav" style="z-index:100 !important;">
-       <ul>
-          <li id="base-nav-main" class="primary-close"><a ng-href="#/">{{exhibition}}</a></li>
-
-           <li id="base-nav-featured"><a ng-href="#/topics/">FEATURED</a></li>
-          <li id="base-nav-resources"><a ng-href="#/resources/">RESOURCES</a></li>
-          <li><!-- EMPTY DIV FOR GREY LINE --></li>
-          <li><a class="grid-trigger" href="#/topics">
-              <img id="index-icon-grid" src="img/icon-hamburger.png" height="100%" width="100%"></a>
-           </li> <!-- primary exhibition trigger -->
-       </ul>
-      </div>
-    </div>
-  </div>
+#header li:nth-child(1), .cd-popup-trigger {
+    float: left;
+    line-height: 80px;
+    display: block;
+	margin-left: 10px;
+}
 
 
+#header li:nth-child(1) img {
+	height: 100%;
+	width: 40px;
+    margin-right: 10px;
+    margin-top: -20px;
+}
+
+#header li:nth-child(2) {
+    float: right;
+    line-height: 80px;
+	margin-right: 10px;
+}
+#header li:nth-child(2) img {
+    margin-left: 15px;
+    margin-top: -20px;
+	height: 100%;
+	width: 40px;
+}
+
+#header li a {
+    font-size: 20pt;
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* POP UPS: POPUP DESCRIPTION AND POPUP EXHIBITION HIGHLIGHTS */
+.popup-description {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 768px;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+.popup-description.is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+    transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.popup-description-container {
+    z-index: 20;
+    position: fixed;
+    height: 440px;
+    width: 70%;
+    margin:8% 0 0 15%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
+    -webkit-transform: translateX(1800px);
+    -moz-transform: translateX(1800px);
+    -ms-transform: translateX(1800px);
+    -o-transform: translateX(1800px);
+    transform: translateX(1800px);
+    /* Force Hardware Acceleration in WebKit */
+    -webkit-backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.popup-description-container h1 {
+    float: left;
+    width: 700px;
+    margin:15px 0 0 15px;
+    font-size: 30pt;
+    font-family: Gilroy !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 60px;
+}
+
+.popup-description-container p {
+    float: left;
+    width: 70%;
+    margin:0px 0 0 20px;
+    font-size: 12pt;
+    line-height: 25px;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+}
+
+.popup-description-container #ex_high {
+    float: right;
+    width: 20%;
+    margin:110px 45px 0 0px;
+    font-size: 25pt;
+    line-height: 35px;
+    font-family: Gilroy !important;
+    font-weight: 800;
+}
+
+.popup-description-container #ex_high img {
+    float: right;
+    margin:20px 70px 0 0;
+    background-color: transparent;
+	width: 80px;
+	height: 40px;
+}
+
+.popup-description-container #ex_high a {
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.popup-description-container .popup-description-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+}
+.popup-description-container .popup-description-close::before, .popup-description-container .popup-description-close::after {
+}
+.popup-description-container .popup-description-close::before, .popup-description-container .popup-description-close::after {
+}
+
+.is-visible .popup-description-container {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.popup-highlights {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    background-color: #ffffff;
+}
+.tertiary-container .highSlides img {
+        height: 420px;
+        margin-top: 90px !important;
+    }
+    
+.popup-highlights.is-visible {
+    opacity: 1;
+    visibility: visible;
+		overflow: scroll;
+}
+
+.popup-highlights-container {
+    height: 90%;
+    width: 100%;
+    margin-left: 0px;
+	margin-top: 54px !important;
+    position: relative;
+    margin: auto;
+    z-index: 20;
+    background-color: #ffffff;
+}
+
+.resources	.popup-highlights-container{
+	margin-top: 100px !important;
+}
+.popup-highlights-container h1 {
+    float: left;
+    width: 700px;
+    margin:10px 0 0 10px;
+    font-size: 30pt;
+    font-family: Gilroy !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 60px;
+}
+
+.popup-highlights-container p {
+    float: left;
+    width: 70%;
+    margin:10px 0 0 20px;
+    font-size: 13pt;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    line-height: 20px;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+.popup-highlights-container .popup-highlights-close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 30px;
+    height: 30px;
+}
+
+#highlights-header {
+    height: 100px;
+    width: 90%;
+    margin-left: 5%;
+    background-color: transparent;
+    position: fixed;
+    z-index: 21;
+}
+
+#highlights-title {
+    margin:30px 0 0 30px;
+    background-color: transparent;
+    font-family: Gilroy;
+    font-weight: 800;
+    font-size: 35pt;
+    position: fixed;
+    z-index: 21;
+}
+
+/*      EXHIBITION HIGHLIGHTS SLIDER     */
+
+/* Slideshow container */
+.highlights-slider-container{
+    height: 75%;
+    width: 90%;
+    margin: 0px 0 0 5% !important;
+    margin: auto;
+    position: fixed;
+    background-color: #f8f8f8;
+}
+
+.highSlides,
+.itemSlides
+{display:none}
+
+.highSlides img, .itemSlides img
+ {
+    height: 380px;
+    width: 65%;
+    margin-left: 17.5%;
+    margin-top: 9% !important;
+    object-fit:cover;
+     object-position: center;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    position: fixed;
+    top: 40%;
+    color: #000000;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 15pt;
+    line-height: 40px;
+    margin-left: -25px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.prev img, .next img {
+    height: 20px;
+    width:50px;
+    position: relative;
+    margin: 0 4px 0 4px;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 44px;
+}
+
+/* Caption text */
+.highSlides-caption {
+    color: #000000;
+    padding: 4px;
+    position: absolute;
+    margin: 0 0 0 17.5%;
+    width: 65%;
+    text-align: center;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 14pt;
+}
+
+/* Number text (1/10 etc) */
+.numbertext {
+    color: #000000;
+    padding: 8px 12px;
+    position: absolute;
+    top: 35px;
+    right: 7%;
+    font-family: Gilroy;
+    font-weight: 800;
+    font-size: 15pt;
+}
+
+
+/*      EXHIBITION HIGHLIGHTS SLIDER     */
+/* POP UPS: POPUP DESCRIPTION AND POPUP EXHIBITION HIGHLIGHTS */
+/*      HOME SCREEN AND DESCRIPTION     */
 
 
 
 
+/*      PRIMARY = CONTENT BELOW THE FOLD     */
 
-<script src="scripts/vendor.49b828bd.js"></script>
+.primary {
+/* by default it's hidden - on top of the viewport */
+    position: fixed;
+	left: 0;
+	top: 0;
+	margin: 0px;
+    height:730px;
+    width: 100%;
+    background: transparent;
+    z-index: 25;
+    padding: 0 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: scroll;
+    /* this fixes the buggy scrolling on webkit browsers - mobile devices only - when overflow property is applied */
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateY(88%);
+    -moz-transform: translateY(88%);
+    -ms-transform: translateY(88%);
+    -o-transform: translateY(88%);
+    transform: translateY(88%);
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
 
-<script src="scripts/scripts.06ee8f88.js"></script>
+.primary.is-visible {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
 
-<script src="js/featured_resource_switchcontrol.js"></script>
-<script src="js/primary_slider_main.js"></script>
-<script src="js/grid-list-view.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.resources').css({
-      'display': 'none',
-    });
-    $('.featured').css({
-      'display': 'none',
-    });
-    $('.base-nav li:nth-child(2)').css({
-      'opacity': '0.5',
-    });
-    $('.base-nav li:nth-child(3)').css({
-      'opacity': '0.5',
-    });
-  if (((navigator.userAgent.match(/OS X.*Safari/))|| (navigator.userAgent.match(/iPad/))) && ! navigator.userAgent.match(/Chrome/)) {
-     document.body.className += 'safari';
-  }
-  $('.grid-trigger').attr('href','#/topics');
-});
-</script>
-</body>
-</html>
+.base-nav {
+    height: 100px;
+    width: 100%;
+    border-top: 2px solid #dedede;
+	border-bottom: 2px solid #dedede;
+	margin-top: 0px;
+    background: #FFFFFF;
+    position: fixed;
+    z-index: 10;
+}
+
+.base-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100px;
+}
+.base-nav li:nth-child(1), .base-nav li:nth-child(1) a {
+    float: left;
+    font-size: 27pt;
+    font-family: Gilroy !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 100px;
+    margin-left: 10px;
+    margin-top: 1px;
+}
+.base-nav li:nth-child(2), .base-nav li:nth-child(3){
+    float: left;
+    margin-left: 30px;
+    font-size: 25pt;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    line-height: 25px;
+    margin-top: 40px;
+}
+
+.base-nav li a {
+    font-size: 25pt;
+    display: block;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    float: left;
+}
+
+.base-nav li:nth-child(4) {
+    float: right;
+    width: 2px;
+    height: 60%;
+    background-color: #dedede;
+    margin-top: 10px;
+    margin-right: 100px;
+}
+.grid-trigger {
+    float: right;
+    position: absolute;
+    right:30px;
+    top: 20px;
+	width: 50px;
+	height: 40px;
+}
+
+/*--- FEATURED SECTION --*/
+
+.featured, .resources  {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    margin:88px 0 0 0px;
+    float: left;
+    position: fixed;
+    z-index: 9;
+		overflow: scroll;
+-webkit-overflow-scrolling: touch;
+}
+
+.resources {
+	display: none;
+}
+
+#featured-header, #resources-header {
+    border-top: 2px solid #dedede;
+    width: 100%;
+    height: 90px;
+    background-color: #ffffff;
+    margin-top: 12px;
+    margin-left: 0px;
+    float: left;
+    position: fixed;
+    z-index: 9;
+}
+
+
+#featured-header h1, #resources-header h1 {
+    margin: 27px 0  0 50px;
+    width: 30%;
+    float: left;
+    font-size: 35pt;
+    font-family: Gilroy !important;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.featured-header-icons, .resources-header-icons {
+    float: right;
+    width: 30%;
+    list-style-type: none;
+    margin: 30px -10% 0 0px;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
+
+#featured-header li, #resources-header li {
+    display: inline-block;
+    margin: 0 15px 0 0px;
+    height: 65px;
+    width: 65px;
+}
+
+#featured-header li:nth-child(1), #resources-header li:nth-child(1) {
+    opacity: 1;
+    margin-top: 0px;
+}
+
+#featured-header li:nth-child(2), #resources-header li:nth-child(2) {
+    margin-top: 2px;
+    position: absolute;
+}
+
+#resources-secondary {
+    width: 100%;
+    height: 60px;
+    background: #ffffff;
+    margin: 95px 0 0 10px;
+    float: left;
+    position: fixed;
+    z-index: 9;
+
+}
+#resources-secondary ul {
+    list-style: none;
+    height: 50px;
+    width: 100%;
+    margin: 0 0 0 0;
+    position: relative;
+}
+
+#resources-secondary ul li{
+    display: inline;
+    float: left;
+    margin-right: 70px;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 20pt;
+    position: relative;
+}
+
+#orderBy .option {
+    background-color: transparent;
+    border: 2px solid #dedede;
+}
+
+#orderBy input {
+    background-color: transparent;
+    border: 2px solid #dedede;
+}
+#filterBy input {
+    background-color: transparent;
+    height: 40px;
+    width: 200px;
+    font-size: 12pt;
+    padding: 5px;
+}
+
+/* FEATURED AND RESOURCES GRID AND LIST VIEW  */
+#featured-list-container {
+    width: 90%;
+    margin-top: 100px;
+    position: relative;
+}
+
+#resources-list-container {
+    width: 90%;
+    margin-top: 150px;
+    position: relative;
+}
+
+#featured-list-container ul, #resources-list-container ul {
+    list-style: none;
+    width: 100%;
+}
+
+#featured-list-container .featured-grid li, #resources-list-container .resources-grid li {
+    width: 30%;
+    margin: 1.5% 1.5% 1.5% 1.5% ;
+    height: 330px;
+    background-color: #dedede;
+    display: inline-block;
+}
+
+.resource-grid-thumbnail {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.featured-grid .featured-grid-title {
+    position: absolute;
+    height: 50px;
+    margin: -55px 0 0 0 !important;
+    background-color: rgba(0,0,0,0.4);
+    width: 30%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 20pt;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 50px;
+    z-index: 8;
+}
+
+.resources-grid .resources-grid-title, .resources-grid .resources-grid-type, .resources-grid .resources-grid-year {
+    display: none;
+}
+
+#featured-list-container .featured-list li, #resources-list-container .resources-list li {
+    width: 30%;
+    margin: 1.5% 0 0 0;
+    height: 330px;
+    background-color: #dedede;
+}
+
+
+.featured-list .featured-grid-title, .resources-list .resources-grid-title {
+    position: absolute;
+    height: 40px;
+    margin: -335px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    width: 65%;
+    font-size: 30pt;
+    font-family: Gilroy;
+    font-weight: 800;
+    line-height: 50px;
+}
+.featured-grid .featured-grid-item-numbers{
+	display: none;
+}
+.featured-list .featured-grid-item-numbers {
+    position: absolute;
+    height: 40px;
+    margin: -300px 0px 60px 32%;
+    background-color: transparent;
+    color: #000000;
+    /*width: 28.8%;*/
+    font-size: 16pt;
+    font-family: Gilroy;
+    font-weight: 200;
+    line-height: 50px;
+}
+
+
+
+body.safari .featured-list .featured-grid-item-numbers {
+	    margin: 40px 0px 60px 2% !important;
+}
+
+.featured-list  .featured-grid-description {
+	position: absolute;
+	height: 200px;
+	margin: -270px 0px 100px 32%;
+    width: 65%;
+	color: #000000;
+	font-size: 14pt;
+	font-family: Gilroy;
+	font-weight: 100;
+	line-height: 22px;
+}
+
+.featured-list .featured-grid-number, .resources-list .resources-grid-number {
+    display: none;
+}
+
+.featured-grid .featured-grid-description {
+    display: none;
+}
+
+
+
+.resources-list .resources-grid-type {
+    position: absolute;
+    margin: -70px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    font-size: 20pt;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 50px;
+
+}
+.resources-list .resources-grid-year {
+    position: absolute;
+    margin: -35px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    font-size: 20pt;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 50px;
+}
+.resources-list .resource-grid-thumbnail {
+    /*display: none;*/
+}
+
+        /* SECONDARY ITEM LIST POPUPS */
+.secondary {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.secondary.is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+    transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.secondary-container {
+    position: fixed;
+    width: 100%;
+    height: 622px;
+    margin: 105px 0 0 0;
+    background: #ffffff;
+    z-index: 20;
+    overflow: scroll;
+}
+
+
+.secondary-container .secondary-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+.resources .secondary-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+.secondary-container .secondary-close::before, .secondary-container .secondary-close::after {
+}
+.secondary-container .secondary-close::before {
+}
+.secondary-container .secondary-close::after {
+}
+.is-visible .secondary-container {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.secondary-container ul {
+    list-style: none;
+    width: 100%;
+    overflow: scroll;
+}
+
+.secondary-container .secondary-list li {
+    width: 30%;
+    margin: 1.5% 0 0 0;
+    height: 375px;
+    background-color: #dedede;
+    overflow: scroll;
+}
+
+.secondary-list .secondary-item-title {
+    position: absolute;
+    height: 50px;
+    margin: 5px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    width: 28.8%;
+    font-size: 40pt;
+    font-family: Gilroy;
+    font-weight: 800;
+    line-height: 50px;
+}
+
+.secondary-item-description {
+    width: 65%;
+    float: left;
+    position: absolute;
+    background-color: transparent;
+    margin: 3px 0px 20px 30%;
+    height: 270px;
+}
+
+
+.secondary-item-description p {
+    width: 90%
+    font-family: Gilroy !important;
+    font-weight: 300;
+    font-size: 14pt;
+    margin-left: 20px;
+    margin-top: 60px;
+}
+
+.secondary-list .secondary-item-type {
+    position: absolute;
+    margin: -240px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    font-size: 16pt;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 50px;
+}
+
+.secondary-list .secondary-item-year {
+    position: absolute;
+    margin: -200px 0px 20px 32%;
+    background-color: transparent;
+    color: #000000;
+    font-size: 16pt;
+    font-family: Gilroy;
+    font-weight: 300;
+    line-height: 50px;
+}
+/* SECONDARY ITEM LIST POPUPS */
+
+/* TERTIARY ITEM LIST POPUPS */
+.tertiary {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.tertiary.is-visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+    -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+    transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.tertiary-container {
+    position: relative;
+    width: 100%;
+    height: 110%;
+    margin: 105px 0 0 0;
+    background: #ffffff;
+    z-index: 20;
+    overflow: scroll;
+}
+
+.tertiary-container .tertiary-close {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+}
+.tertiary-container .tertiary-close::before, .tertiary-container .tertiary-close::after {
+}
+.tertiary-container .tertiary-close::before {
+}
+.tertiary-container .tertiary-close::after {
+}
+.is-visible .tertiary-container {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+#item-header {
+    height: 150px;
+    width: 100%;
+    margin-left: 2%;
+    position: fixed;
+}
+
+#item-header h1 {
+    font-family: Gilroy;
+    font-size: 25pt;
+    font-weight: 800;
+    line-height: 40px;
+    margin-top: -10px !important;
+    margin-left: 0px !important;
+}
+
+#item-header h2 {
+    font-family: Gilroy;
+    font-size: 15pt;
+    font-weight: 800;
+    line-height: 35px;
+    margin-top: -35px;
+}
+
+#item-header h3 {
+    font-family: Gilroy;
+    font-size: 15pt;
+    font-weight: 300;
+    line-height: 35px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+
+
+/* Slideshow container */
+.item-slider-container {
+    /*height: 100% !important;*/
+    width: 90%;
+    margin: 20px 0 0 5%;
+    position: fixed;
+}
+
+/* Next & previous buttons */
+.item-prev, .item-next {
+    position: fixed;
+    top: 45%;
+    color: #000000;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 15pt;
+    line-height: 40px;
+    margin-left: -25px;
+}
+
+.item-prev img, .item-next img {
+    height: 20px;
+    width:50px;
+    position: relative;
+    margin: 0 4px 0 4px;
+}
+
+/* Position the "next button" to the right */
+.item-next {
+    right: 10px;
+}
+
+/* Caption text */
+.list-item {
+    color: #000000;
+    padding: 4px;
+    /*position: absolute;*/
+    margin: 10px 0 0 17.5%;
+    width: 65%;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 14pt;
+    float: left;
+}
+#item-details{
+	display:table-cell;
+    align-items: center; /* Vertical center alignment */
+	 justify-content: center; /* Horizontal center alignment */
+	 width: 20%;
+ }
+
+ #item-image{
+     margin-top: -100px !important;
+	 margin: 0 0 0 17.5%;
+ }
+.list-item-caption {
+    color: red;
+    padding: 4px;
+    margin: 0 0 0 17.5%;
+    width: 65%;
+    font-family: Gilroy;
+    font-weight: 300;
+    font-size: 14pt;
+    float: left;
+}
+
+#list-item-links {
+	 position: absolute;
+    height: 100px;
+    /*width: 5%;*/
+    margin-left: 2%;
+    /*margin-top: 400px;*/
+    bottom: 10px;
+}
+
+#list-item-links h1 a{
+    font-family: Gilroy;
+    font-size: 12pt;
+    font-weight: 300;
+    line-height: 25px;
+    margin-top: 0px;
+    color: #609544;
+}
+
+#list-item-links h1 img, #item-links h1 img {
+    height: 12px;
+    width: 12px;
+}
+#list-item-links h2{
+    font-family: Gilroy;
+    font-size: 12pt;
+    font-weight: 300;
+    line-height: 25px;
+    margin-top: -30px;
+}
+
+#list-item-links h2 a, #item-links h2 a {
+    color: #609544;
+}
+/* TERTIARY ITEM LIST POPUPS */
+
+/* FOOTER FOR BOTH FEATURED AND RESOURCES */
+#featured-footer, #resources-footer {
+    height: 210px;
+    width: 100%;
+    border-top: 2px solid #dedede;
+    background: #FFFFFF;
+    position: relative;
+    margin-top: 0px;
+	overflow: hidden;
+}
+
+#featured-footer-main, #resources-footer-main {
+    height: 100%;
+    width: 50%;
+    float: left;
+    margin-left: 4%;
+}
+
+#featured-footer-main h1, #resources-footer-main h1 {
+    font-size: 20pt;
+    font-family: Gilroy !important;
+    font-weight: 800;
+}
+
+#featured-footer-main a, #resources-footer-main a {
+	width: 100%;
+	height: 30px;
+    font-size: 15pt;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    color: #609544;
+    z-index: 30;
+}
+
+#featured-footer-main p, #resources-footer-main p {
+    font-size: 15pt;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    line-height: 15px;
+}
+
+#featured-footer-secondary, #resources-footer-secondary {
+    height: 50%;
+    width: 40%;
+    margin-top: 5%;
+    float: right;
+}
+
+#featured-footer h3, #resources-footer h3 {
+    font-size: 15pt;
+    font-family: Gilroy !important;
+    font-weight: 300;
+    float: right;
+    margin-right: 25px;
+}
+
+#featured-footer h3 a, #resources-footer h3 a {
+    color: #609544;
+}
+
+#featured-footer img, #resources-footer img {
+    float: right;
+    margin-top: 0;
+    height: 70px;
+    width:70px;
+    margin-right: 50px;
+}
+
+.main {
+    height: 100%;
+    z-index: 1;
+}
+
+#base-nav-featured,
+#base-nav-resources
+{
+	opacity: 0.5;
+}
+
+.w3-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.w3-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+.w3-animate-top{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+.w3-animate-left{position:relative;animation:animateleft 0.4s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+.w3-animate-right{position:relative;animation:animateright 0.4s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-bottom{position:relative;animation:animatebottom 0.4s}@keyframes animatebottom{from{bottom:-300px;opacity:0} to{bottom:0;opacity:1}}
